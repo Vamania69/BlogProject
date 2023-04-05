@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Switch } from "react-router-dom";
+import Home from "./components/Home/Home";
+import BlogPage from "./components/BlogPage/BlogPage";
+import SingleBlog from "./components/SingleBlogPage/SingleBlog";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import UserProfile from "./components/userProfile/UserProfile";
+import { BrowserRouter as Router } from "react-router-dom";
+import ProtectedRoutes from "./protectedRoutes/ProtectedRoutes";
+import { useEffect, useState } from "react";
+import userProfile from "./components/userProfile/UserProfile";
+const App = () => {
+  const [isLoggedIn, SetLoggedIn] = useState(true);
 
-function App() {
+  useEffect(() => {}, []);
+  // <Route
+  //           path="/user"
+  //           element={<ProtectedRoutes component={UserProfile} />}
+  //         />
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/blogs" element={<BlogPage />} />
+          <Route path="/blo1gId" element={<SingleBlog />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/user/*"
+            element={
+              <ProtectedRoutes
+                isLoggedIn={isLoggedIn}
+                component={userProfile}
+              />
+            }
+          />
+        </Routes>
+      </Router>
     </div>
   );
-}
-
+};
 export default App;
