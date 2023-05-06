@@ -1,0 +1,56 @@
+/* * {
+    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Play', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
+} */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* font-family: ; */
+    font-family: 'Poppins', sans-serif;
+
+}
+
+:root {
+    --primary-color: #111827;
+    --background-color: #0E131E;
+    --secondary-color: #4338CA;
+    --border-color: #9CA3AF;
+
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    margin: 0;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: large;
+    padding: .5rem 2rem;
+}
+
+/* .btn-primary:hover {
+    background-color: #4F46E5
+} */
+
+.category {
+    padding: .2rem .6rem;
+    margin: 10px 0;
+    display: inline;
+    border-radius: 20px;
+}
+
+.category-sport {
+    background-color: rgb(218, 113, 148);
+}
+
+.category-tech {
+    background-color: rgb(236, 243, 41);
+}
+
+.category-finance {
+    background-color: rgb(218, 119, 58);
+}
