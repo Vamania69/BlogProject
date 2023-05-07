@@ -1,0 +1,12 @@
+.blogs-list-container>* {
+    margin: 5px;
+}
+
+select>option {
+    border-radius: .5rem;
+}
+
+select>option:hover {
+    background-color: var(--background-color);
+
+}

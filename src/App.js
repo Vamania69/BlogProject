@@ -1,20 +1,19 @@
-import { Route, Routes, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import BlogPage from "./components/BlogPage/BlogsListPage";
 import SingleBlog from "./components/SingleBlogPage/SingleBlog";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import UserProfile from "./components/userProfile/UserProfile";
 import { BrowserRouter as Router } from "react-router-dom";
 import ProtectedRoutes from "./protectedRoutes/ProtectedRoutes";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import userProfile from "./components/userProfile/UserProfile";
 import PageNotFound from "./components/shared/pageNotFound";
 import Navbar from "./components/shared/navbar";
 import Footer from "./components/shared/footer";
 import "./App.css";
 const App = () => {
-  const [isLoggedIn, SetLoggedIn] = useState(true);
+  // const [isLoggedIn, SetLoggedIn] = useState(true);
 
   useEffect(() => {}, []);
   // <Route
@@ -35,10 +34,7 @@ const App = () => {
           <Route
             path="/user/:userId"
             element={
-              <ProtectedRoutes
-                isLoggedIn={isLoggedIn}
-                component={userProfile}
-              />
+              <ProtectedRoutes isLoggedIn={true} component={userProfile} />
             }
           />
           <Route path="*" element={<PageNotFound />} />
