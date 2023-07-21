@@ -1,4 +1,4 @@
-ul>*:hover {
+.footer-container ul>*:hover {
     color: var(--secondary-color);
     cursor: pointer;
 }

@@ -1,9 +1,0 @@
-.navigation>* {
-    margin-left: 3rem;
-    padding: 1rem 1rem;
-
-}
-
-.navigation>*:hover {
-    background-color: var(--background-color);
-}

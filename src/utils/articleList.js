@@ -29,3 +29,11 @@ const articleContent = [
 ];
 
 export default articleContent;
+
+
+export const getStaticProps = async () => {
+
+
+
+  
+}
