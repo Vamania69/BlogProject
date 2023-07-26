@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { TbBulbFilled } from "react-icons/tb";
 import BlogWidget from "../shared/BlogWidgets/BlogWidget";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { fetchBlogs } from "../../features/BlogsListSlice";
 import { store } from "../../ReduxStore/store";
 import { toast } from "react-toastify";
+import { FiSearch } from "react-icons/fi";
 const Home = () => {
   async function getData() {
     await store.dispatch(fetchBlogs());
@@ -13,38 +14,47 @@ const Home = () => {
   useEffect(() => {
     getData();
   }, []);
-
-  // useEffect = () => {
-  //   // const [currentBlog, setCurrentBlog] = useState({});
-  //   // here we will write an async function to render some random blog as object and set it to the currentBlog state
-
-  //   // getData();
-
-  // };
+  //
+  // state to hold the search value
+  const [searchValue, setSearchValue] = useState("");
+  // getting the store slice reducer to update the search results
   const blogsList = useSelector((state) => state.blogsList);
+  console.log(blogsList.blogsList);
 
+  useEffect(()=>{
+  setSearchedBlogs(blogsList.blogsList)
+},[blogsList.blogsList])
+  const [searchedBlogs, setSearchedBlogs] = useState([]);
+  // search function
+  
+  const searchHandler = () => {
+    const filteredBlogs = blogsList.blogsList.filter((blog) => {
+      return blog.title.toLowerCase().includes(searchValue.toLowerCase());
+    });
+    setSearchedBlogs(filteredBlogs);
+    console.log(searchedBlogs);
+  };
+  // input value handler
+  const searchValueHandler = (e) => {
+    setSearchValue(e.target.value);
+  };
+  // to sync the input then search for the blogs realted to the keywords
+
+  useEffect(() => {
+    console.log(searchValue);
+    console.log(searchedBlogs);
+    // calling the search filter
+    searchHandler();
+  }, [searchValue]);
   console.log(blogsList);
-
-  //this is a widegt of a blog that render as a random suggestion
-
-  //state that will hold the article and update if needed
-  // const getData = async () => {
-  //   try {
-
-  //     // async function to get blogs
-  //     const response = await axios.get(`http://localhost:8000/posts/blogs`);
-  //     console.log(response);
-
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-
-  // };
 
   // selecting a random blog form te blogStore that will be renderd on the hero section
   const randomBlog = blogsList.blogsList[Math.floor(Math.random() * 10)];
 
   const isLoggedIn = useSelector((state) => state.currentUser.isLoggedIn);
+
+  // calling the search function to get the related blogs
+console.log(searchedBlogs)
   return (
     <>
       <section
@@ -84,11 +94,30 @@ const Home = () => {
             )
           }
           <section className="blogs-container mt-20 latest-blogs-contianer">
-            <h1> Latest Blog's</h1>
-            <h3 className="text-border">
-              Discover the most outstanding articles ins all topics of life
-            </h3>
-
+            <div className="md:flex justify-between ">
+              <div className="">
+                <h1> Latest Blog's</h1>
+                <h3 className="text-border">
+                  Discover the most outstanding articles ins all topics of life
+                </h3>
+              </div>
+              <div className="">
+                <form action="" className=" flex  ">
+                  <input
+                    type="search"
+                    name="search"
+                    placeholder="Search blogs"
+                    id="search"
+                    value={searchValue}
+                    onChange={searchValueHandler}
+                    className="b-none rounded-md text-black p-1   flex "
+                  />
+                  <span className="bg-container  items-center cursor-pointer  p-2">
+                    <FiSearch />
+                  </span>
+                </form>
+              </div>
+            </div>
             {
               // suggestion blog container with 2 parts
             }
@@ -108,7 +137,7 @@ const Home = () => {
                 {blogsList.loading ? (
                   <div>loading </div>
                 ) : (
-                  blogsList.blogsList.map((blog, i) => {
+                  searchedBlogs.map((blog, i) => {
                     // i as the key for each widget based on its blog_id
                     i = blog.blog_id;
                     return (

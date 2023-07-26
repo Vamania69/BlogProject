@@ -6,15 +6,45 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { store } from "../../ReduxStore/store";
+import { fetchBlogs } from "../../features/BlogsListSlice";
+import { FiSearch } from "react-icons/fi";
+
+// import the search funtion from the searchComponent
+import UseSearchcomponent from "../shared/searchComponent/searchComponent";
+
 function BlogPage() {
+  async function getData() {
+    await store.dispatch(fetchBlogs());
+    // searchHandler()
+  }
+  useEffect(() => {
+    // set the initial state of the blogs
+    getData();
+    console.log(blogsList);
+  }, []);
+  const { searchValue, setSearchValue, searchedBlogs, searchHandler } =
+    UseSearchcomponent();
+  // get the inital blog state from the store
+  const [blogsState, setBlogsState] = useState(searchedBlogs);
+  const blogsList = useSelector((state) => state.blogsList);
+
+  // handle the search value onchnage
+  const searchValueHandler = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  useEffect(() => {
+    console.log(searchValue);
+  }, [searchValue]);
+
+  useEffect(() => {
+    console.log(searchedBlogs);
+    setBlogsState(searchedBlogs);
+  }, [searchedBlogs]);
+
   // get the user login state from the store
   const isLoggedIn = useSelector((state) => state.currentUser.isLoggedIn);
-  // get the inital blog state from the store
-  const blogsList = useSelector((state) => state.blogsList);
-  console.log(blogsList);
-
-  // set the initial state of the blogs
-  const [blogsState, setBlogsState] = useState(blogsList.blogsList);
   // console.log(blogsState);
 
   // set the initial state of the blogs
@@ -70,23 +100,34 @@ function BlogPage() {
     // button to load more blogsWidgets in the list
   }, [startFrom]);
 
+  // select handler
+  const [categoryValue, setCategoryValue] = useState("all");
+  const categorySelectHandler = () => {
+    categoryValue === "all"
+      ? setBlogsState(searchedBlogs)
+      : setBlogsState(
+          searchedBlogs.filter((blog) => blog.category === categoryValue)
+        );
+  };
+  useEffect(() => {
+    categorySelectHandler();
+  }, [categoryValue]);
+
   return (
     <div className=" bg-container  md:p-10">
       <section
         className="main-container text-white rounded-xl border-border  bg-primary p-8"
         id="main-contianer"
       >
-        <h1>Here are all the articles realated to the content.</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui corrupti
-          enim nobis fugit voluptate necessitatibus explicabo delectus eveniet
-          quisquam. Excepturi!
-        </p>
-        <section className="blogs-hero-container flex ">
-          <div className="lead-blog-contianer hidden md:block">
-            <div className="img-container">
-              <img src="assets/right-slide-home.jpg" alt="" />
-              <div className="content-description">
+        <section className="blogs-hero-container block md:flex ">
+          <div className="lead-blog-contianer block md:block">
+            <h1 className="py-4">Discover Captivating Tales: Journey Through Our Enchanting Blogosphere!</h1>
+            <p className="py-3">
+            Delve into an Inspiring Odyssey of Stories, Wisdom, and Adventure in Our Captivating Blogosphere. Explore Boundless Horizons and Ignite Your Imagination Today!
+            </p>
+            <div className="img-container border-border rounded-lg border-2 p-3">
+              <img src="assets/right-slide-home.jpg" alt="Image" />
+              <div className="content-description py-3">
                 <h1>Article Title</h1>
                 <p className="discription">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut
@@ -107,30 +148,57 @@ function BlogPage() {
               </div>
             </div>
           </div>
-          <div className="filter-container  gap-1 ">
-            <select
-              name="category "
-              className="bg-primary border-secondary-normal hover:border-secondary-hover border-[1px] rounded-lg "
-              id="category"
-            >
-              <option value="all">All</option>
-              <option value="Technolog">Technolog</option>
-              <option value="Web3">Web3</option>
-            </select>
-            <select
-              name="sort"
-              id="sort"
-              className="sort-bu bg-primary border-secondary-normal hover:border-secondary-hover border-[1px] rounded-lg "
-            >
-              <option value="recent">Recent</option>
-              <option value="Most Read">Most Read</option>
-              <option value="Most Liked">Most Liked</option>
-              <option value="Most Commented">Most Commented</option>
-            </select>
+          <div className="flex flex-col justify-end items-center md:items-end">
+            <h3 className="text-border p-5">
+              Get More filterd and precise content !!
+            </h3>
+            <div className=" filter-container flex flex-col justify-center gap-1  m-4">
+              <form action="" className=" flex  ">
+                <input
+                  type="search"
+                  name="search"
+                  placeholder="Search blogs"
+                  id="search"
+                  value={searchValue}
+                  onChange={searchValueHandler}
+                  className="b-none rounded-md text-black p-1   flex "
+                />
+                <span className="bg-container  items-center cursor-pointer  p-2">
+                  <FiSearch />
+                </span>
+              </form>
+              <select
+                onChange={(e) => setCategoryValue(e.target.value)}
+                name="category "
+                className="bg-primary w-[50%] m-5 text-center p-1  border-secondary-normal hover:border-secondary-hover border-[1px] rounded-lg "
+                id="category"
+              >
+                <option value="all">All</option>
+                <option value="Development">Development</option>
+                <option value="Soft-Skills">Soft-Skills</option>
+                <option value="Artificial-Intelligence">
+                  Artificial-Intelligence
+                </option>
+                <option value="Blockchain">Blockchain</option>
+              </select>
+            </div>
+
+            {
+              // <select
+              //   name="sort"
+              //   id="sort"
+              //   className="sort-bu bg-primary border-secondary-normal hover:border-secondary-hover border-[1px] rounded-lg "
+              // >
+              //   <option value="recent">Recent</option>
+              //   <option value="Most Read">Most Read</option>
+              //   <option value="Most Liked">Most Liked</option>
+              //   <option value="Most Commented">Most Commented</option>
+              //</div></select>
+            }
           </div>
         </section>
         {/* mapping the blogslist from the blogstateSlice  */}
-        <div className="blogs-list-container    p-5 flex-wrap ">
+        <div className="blogs-list-container    p-2 flex-wrap ">
           {blogsState.map((blog, i) => {
             // i is the index of the blog in the blogsList array based on its blog_id
             i = blog.blog_id;
@@ -141,7 +209,11 @@ function BlogPage() {
                 {isLoggedIn ? (
                   <Link to={`/blog/${i}`}>
                     {" "}
-                    <BlogWidget key={i} blogWordLimit={30}  blog={blog}></BlogWidget>
+                    <BlogWidget
+                      key={i}
+                      blogWordLimit={30}
+                      blog={blog}
+                    ></BlogWidget>
                   </Link>
                 ) : (
                   <span
@@ -149,7 +221,11 @@ function BlogPage() {
                       return toast.error("Kindly login to see blog");
                     }}
                   >
-                    <BlogWidget key={i} blogWordLimit={30} blog={blog}></BlogWidget>
+                    <BlogWidget
+                      key={i}
+                      blogWordLimit={30}
+                      blog={blog}
+                    ></BlogWidget>
                   </span>
                 )}
               </>

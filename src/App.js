@@ -22,7 +22,7 @@ import 'react-toastify/dist/ReactToastify.css'
 function App() {
   // getting the dispatch function from the store to update the userSlice
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     console.log(auth.currentUser);
     // middleware observer that chaecks if the user is logged in or not

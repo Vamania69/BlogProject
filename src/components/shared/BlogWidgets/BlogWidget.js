@@ -25,12 +25,10 @@ function BlogWidget({blog , blogTitleLimit , blogWordLimit}) {
   // };
 
 
-  console.log(blog);
 
   // extract the data from the blog object
    const {title, content, coverImage , category, writer, likes, comments} = blog;
    
-   console.log(blogTitleLimit)
     return (
     <div className="blog blog-container  m-[16px.0px]   md:flex border-border border-solid border-[1px] mx:max-h-[245px] mx:min-h-[240px] rounded-2xl md:p-5 min-w-[33%] ">
       <div className=" blog-right  md:w-2/5     ">

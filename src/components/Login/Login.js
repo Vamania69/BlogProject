@@ -14,7 +14,6 @@ function Login({ visible, onClose, setVisible }) {
     password: "",
   });
 
-  console.log(onClose);
   // close the login form handle
   const closeLoginHandler = (e) => {
     //  checking wheather user click on the close button or outside the form

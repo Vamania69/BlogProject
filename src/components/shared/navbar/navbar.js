@@ -10,6 +10,8 @@ import { setLoggedOut } from "../../../features/UserStatusSliceStore";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { set } from "lodash";
+import { searchHandler } from "../../Home/Home";
+import { setBlogs } from "../../../features/BlogsListSlice";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const Navbar = () => {
 
   // open and close mobile menu
   const [isMenuOpen, setMenuOpen] = useState("hidden");
-  
+
   // open handler changes the className to flex
   const openMenu = () => {
     setMenuOpen("flex");
@@ -47,17 +49,12 @@ const Navbar = () => {
   const closeMenu = (e) => {
     setMenuOpen("hidden");
     // if user clicks on the close-menu-button or any section of the menu then close the menu
-    if(e.target.id!=="close-menu-button"||e.target.id!=="mob-menu" )
-       setMenuOpen("hidden");
+    if (e.target.id !== "close-menu-button" || e.target.id !== "mob-menu")
+      setMenuOpen("hidden");
     console.log(isMenuOpen);
-  
   };
 
-  // state to hold the search value
-  const [searchValue, setSearchValue] = useState("");
-
-  
-  
+ 
 
   return (
     <>
@@ -115,20 +112,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="right-container bg-primary  flex items-center mt-3  mr-8 mb-4 ">
-            <form action="" className="search flex  ">
-              <input
-                type="search"
-                name="search"
-                placeholder="  Search blogs"
-                id="search"
-                onChange={((e)=>{setSearchValue(e.target.value)
-                console.log(searchValue)})}
-                className="b-none rounded-md text-black p-1 max-md:hidden  flex "
-              />
-              <span className="bg-container max-md:hidden items-center cursor-pointer  p-2">
-                <FiSearch />
-              </span>
-            </form>
+            
           </div>
           <div
             id="hamburger-menu"
@@ -136,30 +120,35 @@ const Navbar = () => {
             className="hamburger-menu text-4xl m-3 max-2xl:hidden max-md:block cursor-pointer max-xs:ml-2"
           >
             <GiHamburgerMenu />
-            </div>
+          </div>
 
-            {
-              // mobile menu section
-            }
-            <section 
+          {
+            // mobile menu section
+          }
+          <section
             onClick={closeMenu}
-              id="mob-menu"
-              className={`bg-primary text-white  ${isMenuOpen}  flex-col items-center  w-full  fixed top-0 left-0 z-30 origin-top animate-open-menu `}
+            id="mob-menu"
+            className={`bg-primary text-white  ${isMenuOpen}  flex-col items-center  w-full  fixed top-0 left-0 z-30 origin-top animate-open-menu `}
+          >
+            <button
+              onClick={closeMenu}
+              id="close-menu-button"
+              className="close-menu-button self-end m-0 text-6xl p-3 cursor-pointer top-0"
             >
-              <button
-                onClick={closeMenu}
-                id="close-menu-button"
-                className="close-menu-button self-end m-0 text-6xl p-3 cursor-pointer top-0"
+              &times;
+            </button>
+            <nav className="mob-menu h-[100vh] w-full text-center  flex flex-col justify-center">
+              <Link to={"/"}> Home</Link>
+              <Link to={"/blogs"}> Blogs</Link>
+              <div
+                onClick={loginHandler}
+                className="login-button cursor-pointer"
               >
-                &times;
-              </button>
-              <nav className="mob-menu h-[100vh] w-full text-center  flex flex-col justify-center">
-                <Link to={"/"}> Home</Link>
-                <Link to={"/blogs"}> Blogs</Link>
-                <div onClick={loginHandler} className="login-button cursor-pointer">Login</div>
-                <Link to={"/register"}>Register</Link>
-              </nav>
-            </section>
+                Login
+              </div>
+              <Link to={"/register"}>Register</Link>
+            </nav>
+          </section>
         </div>
       </nav>
     </>
