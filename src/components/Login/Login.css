@@ -1,0 +1,6 @@
+.login-form>input {
+    margin: 1rem 0px;
+    line-height: 2rem;
+    border-radius: 1rem;
+    padding: .5rem;
+}

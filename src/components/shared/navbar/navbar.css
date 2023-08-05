@@ -1,0 +1,20 @@
+.navigation>* {
+    margin-left: 3rem;
+    padding: 1rem 1rem;
+
+}
+
+.navigation>*:hover {
+    background-color: var(--background-color);
+}
+
+.mob-menu >*{
+    padding: 1.5rem ;
+    width: 100%;
+    display: block; 
+    border-bottom: 1px solid var(--border-color);
+
+}
+.mob-menu >*:hover{
+    background-color: var(--background-color);
+}

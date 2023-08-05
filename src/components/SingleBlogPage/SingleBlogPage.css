@@ -1,0 +1,21 @@
+.blog-content > p{
+  margin : .75rem .25rem
+}
+
+
+.blog-content a {
+  color: var(--secondary-color)
+ }
+ .blog-content p >img  {
+   margin: auto;
+   max-height: 100%;
+ }
+ .blog-content ol{
+   list-style: decimal;
+ }
+ .blog-content ul{
+   list-style: lower-roman;
+ }
+ .blog-content ul:hover{
+   color: none;
+ }
