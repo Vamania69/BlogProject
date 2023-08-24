@@ -45,7 +45,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { baseUrl } from "../utils/url_export";
 const initialState = {
   blogsList: [],
   loading: false,
@@ -56,10 +56,12 @@ export const fetchBlogs = () => async (dispatch) => {
   dispatch(setLoading(true));
 
   try {
-    const response = await axios.get("http://localhost:8000/posts/blogs");
+    const response = await axios.get(`${baseUrl}/blogs`);
     console.log(response)
     dispatch(setBlogs(response.data));
   } catch (error) {
+    console.log(error)
+    console.log(`${baseUrl}/blogs`)
     console.error(error.message);
   }
 
