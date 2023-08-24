@@ -56,12 +56,12 @@ export const fetchBlogs = () => async (dispatch) => {
   dispatch(setLoading(true));
 
   try {
-    const response = await axios.get(`${baseUrl}/blogs`);
+    const response = await axios.get(`${baseUrl}`+`/blogs`);
     console.log(response)
     dispatch(setBlogs(response.data));
   } catch (error) {
     console.log(error)
-    console.log(`${baseUrl}/blogs`)
+    console.log(`${baseUrl}`+`/blogs`)
     console.error(error.message);
   }
 
