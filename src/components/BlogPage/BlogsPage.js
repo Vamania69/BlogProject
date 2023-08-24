@@ -12,6 +12,7 @@ import { FiSearch } from "react-icons/fi";
 
 // import the search funtion from the searchComponent
 import UseSearchcomponent from "../shared/searchComponent/searchComponent";
+import { baseUrl } from "../../utils/url_export";
 
 function BlogPage() {
   async function getData() {
@@ -61,7 +62,7 @@ function BlogPage() {
   // async funtion to get more blogs from server and rendering direclty as blogs widgets
   const getMoreBlogs = async (start, end) => {
     try {
-      const response = await axios.get(`http://localhost:8000/posts/blogs`);
+      const response = await axios.get(`${baseUrl}/blogs`);
       console.log(response.data);
       // filtering the next 10 blogs from the response
       const moreBlogs = response.data.slice(start, end);

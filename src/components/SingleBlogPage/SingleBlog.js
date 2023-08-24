@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { FcLikePlaceholder } from "react-icons/fc";
 import { BiMessageDetail } from "react-icons/bi";
 import "./SingleBlogPage.css"
+import { baseUrl } from "../../utils/url_export";
 function SingleBlog() {
   const [blog, setBlog] = useState({});
   const [comments, setComments] = useState([]);
@@ -30,13 +31,13 @@ function SingleBlog() {
         try {
           // blog details
           const blogResponse = await axios.get(
-            `http://localhost:8000/posts/blog/${blogId}`
+            `${baseUrl}/blog/${blogId}`
           );
           console.log(blogResponse);
           setBlog(blogResponse.data[0]);
           // comments details as array of objects
           const commentsResponse = await axios.get(
-            `http://localhost:8000/posts/blog/${blogId}/comments`
+            `${baseUrl}/blog/${blogId}/comments`
           );
           console.log(commentsResponse);
           setComments(commentsResponse.data);
