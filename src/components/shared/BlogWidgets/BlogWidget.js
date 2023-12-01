@@ -31,17 +31,17 @@ function BlogWidget({blog , blogTitleLimit , blogWordLimit}) {
    
     return (
     <div className="blog blog-container  m-[16px.0px]   md:flex border-border border-solid border-[1px] mx:max-h-[245px] mx:min-h-[240px] rounded-2xl md:p-5 min-w-[33%] ">
-      <div className=" blog-right  md:w-2/5     ">
+      <div className=" blog-right  md:w-2/5 flex bg-white rounded-2xl    ">
         <img
           src={coverImage}
-          className="rounded-xl w-[100%]  h-[100%] max-h-[185px] xs:max-h-[415px]  md:max-h-[220px] "
+          className=" w-auto  h-[100%] m-auto justify-center max-h-[185px] xs:max-h-[415px]  md:max-h-[220px] rounded-2xl "
           alt="image"
         />
       </div>
       <div className="blog-left pl-2  md:w-3/5 ">
         <div className= {`category category-${category} `} >{category}</div>
-        <h2 className="blog-title">{title.slice(0,blogTitleLimit)}...</h2>
-        <p>{content.slice(0,blogWordLimit)}...</p>
+        <h2 className="blog-title text-xl sm:text-2xl">{title.slice(0,blogTitleLimit)}...</h2>
+        <p className="text-sm xs:text-base text-gray-300">{content.slice(0,blogWordLimit)}...</p>
 
         <div className="text-border writer flex text-white">
           <div className="writter-profile mr-2   ">

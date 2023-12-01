@@ -12,17 +12,15 @@ import PageNotFound from "./components/shared/pageNotFound";
 import Navbar from "./components/shared/navbar/navbar";
 import Footer from "./components/shared/Footer/footer";
 import "./App.css";
-import Comments from "./utils/comments";
 import { auth } from "./firebaseConfig/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLoggedIn, setLoggedOut } from "./features/UserStatusSliceStore";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   // getting the dispatch function from the store to update the userSlice
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     console.log(auth.currentUser);
     // middleware observer that chaecks if the user is logged in or not

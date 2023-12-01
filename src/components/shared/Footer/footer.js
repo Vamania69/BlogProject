@@ -5,7 +5,7 @@ function Footer() {
   return <>
     <footer className="footer-section border-t-2 border-border bg-primary" id="footer">
 
-      <div className="footer-contianer  text-white md:flex  p-12 flex-1 gap-5" >
+      <div className="footer-contianer  text-white md:flex p-6  xs:p-8 sm:p-12 flex-1 gap-5" >
         <div className="text-center md:flex  justify-around gap-5">
           <div className="about-us ">
             <h2>Resources</h2>

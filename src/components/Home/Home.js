@@ -21,12 +21,12 @@ const Home = () => {
   const blogsList = useSelector((state) => state.blogsList);
   console.log(blogsList.blogsList);
 
-  useEffect(()=>{
-  setSearchedBlogs(blogsList.blogsList)
-},[blogsList.blogsList])
+  useEffect(() => {
+    setSearchedBlogs(blogsList.blogsList);
+  }, [blogsList.blogsList]);
   const [searchedBlogs, setSearchedBlogs] = useState([]);
   // search function
-  
+
   const searchHandler = () => {
     const filteredBlogs = blogsList.blogsList.filter((blog) => {
       return blog.title.toLowerCase().includes(searchValue.toLowerCase());
@@ -54,38 +54,43 @@ const Home = () => {
   const isLoggedIn = useSelector((state) => state.currentUser.isLoggedIn);
 
   // calling the search function to get the related blogs
-console.log(searchedBlogs)
+  console.log(searchedBlogs);
   return (
     <>
       <section
-        className="  hero-section md:p-10  flex flex-col  bg-primary text-white"
+        className="  hero-section p-4 sm:p-71qw md:p-10  flex flex-col  bg-primary text-white"
         id="hero-section"
       >
         <div className="hero-heading m-10 max-w-screen-xl self-center ">
-          <h1 className=" mb-2 ">
-            Editor's pic
-            <span className="inline">
-              <TbBulbFilled color="yellow" />
-            </span>
-          </h1>
-          <p className="text-xl  text-border">
-            Here is the knowledge you should gain every day !!
-          </p>
+          <div>
+           
+            <h1 className=" mb-2 ">
+              Editor's pic
+              <span className="inline">
+                <TbBulbFilled color="yellow" />
+              </span>
+            </h1>
+            <p className="text-xl  text-border">
+              Here is the knowledge you should gain every day !!
+            </p>
+          </div>
           {
             //if the random blog is fetched when the blogs are stored inside the store and then if randomBlog !== undefined then render the hero section
             randomBlog && (
               // hero section
               <section className="large-contianer slide-container mt-10  md:flex ">
-                <div className="left-slide md:self-center md:w-2/5  backdrop-blur-2xl h-[100%]  border-solid border-2 border-border rounded-xl z-10 p-10">
-                  <h1>{randomBlog.title}</h1>
-                  <p className="">{randomBlog.content.slice(0, 100)}</p>
+                <div className="left-slide md:self-center md:w-2/5  backdrop-blur-2xl h-[100%]  border-solid border-2 border-border rounded-xl z-10 p-4 sm:p-10">
+                  <h2>{randomBlog.title}</h2>
+                  <p className="text-sm sm:text-base">
+                    {randomBlog.content.slice(0, 100)}
+                  </p>
                 </div>
 
                 <div className="right-slide md:w-4/5 mt-[-100px] md:mt-[0px] md:ml-[-100px] justify-end">
                   <div className="img-contianer  ">
                     <img
                       src={randomBlog.coverImage}
-                      className="h-[500px] rounded-xl  w-auto"
+                      className="h-auto rounded-xl  w-auto"
                       alt=""
                     />
                   </div>
@@ -97,7 +102,7 @@ console.log(searchedBlogs)
             <div className="md:flex justify-between ">
               <div className="">
                 <h1> Latest Blog's</h1>
-                <h3 className="text-border">
+                <h3 className="text-border py-5">
                   Discover the most outstanding articles ins all topics of life
                 </h3>
               </div>
@@ -176,8 +181,8 @@ console.log(searchedBlogs)
             </Link>
           </section>
         </div>
-        <div className="section subscribe-writer p-10 rounded-xl block flex-1 md:flex bg-container ">
-          <div className="min-w-[50%] p-5">
+        <div className="section subscribe-writer p-2 xs:p-5 sm:p-10 rounded-xl block flex-1 md:flex bg-container ">
+          <div className="min-w-[50%] sm:p-5">
             <p className="text-border">SUPPER CHANGE YOUR PLANNING POWERS</p>
             <h1 className="mt-5">
               SUPPER CHANGE YOUR PLANNING POWERS Become an author and share your
@@ -188,13 +193,13 @@ console.log(searchedBlogs)
               Exercitationem harum, dolore suscipit quaerat sit reiciendis magni
               sint quos placeat optio maxime quis labore non maiores.
             </p>
-            <form action="submit">
+            <form action="submit" className="p-3 sm:p-5">
               <input
                 type="email"
-                className="block text-black border-none m-[2rem.5rem] rounded-md p-2"
+                className="block text-black border-none mb-4 sm:m-[2rem.5rem]  rounded-md p-2"
                 placeholder="@ Enter your email"
               />
-              <button className="btn-primary mt-1 hover:bg-secondary-hover">
+              <button className="btn-primary  hover:bg-secondary-hover text-xs sm:text-base mt-5">
                 Register as an Author
               </button>
             </form>
