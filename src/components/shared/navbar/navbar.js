@@ -54,8 +54,6 @@ const Navbar = () => {
     console.log(isMenuOpen);
   };
 
- 
-
   return (
     <>
       <nav
@@ -111,9 +109,7 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          <div className="right-container bg-primary  flex items-center mt-3  mr-8 mb-4 ">
-            
-          </div>
+          <div className="right-container bg-primary  flex items-center mt-3  mr-8 mb-4 "></div>
           <div
             id="hamburger-menu"
             onClick={openMenu}
